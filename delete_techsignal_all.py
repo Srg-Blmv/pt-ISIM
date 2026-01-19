@@ -40,26 +40,21 @@ def get_tech_table():
     data = response.json()
 
     for item in data["data"]:
-        # ищем где в имене есть key_word   
-        if mac in item["ownersMacs"][0]:
-            #print(mac)
-            if delete:
-                status_code = delete_tech_sig(item.get('id',''))
-                if status_code == 200:
-                    print(f"DELETE: {item.get('id','')}:  {item.get('name','')}")
-                else:
-                    print(f"Error: {status_code}   {item.get('id','')}:  {item.get('name','')}")
-          
+        if delete:
+            status_code = delete_tech_sig(item.get('id',''))
+            if status_code == 200:
+                print(f"DELETE: {item.get('id','')}:  {item.get('name','')}")
             else:
-                print(f"{item.get('id','')}:  {item.get('name','')} {item.get('ownersMacs','')}")
+                print(f"Error: {status_code}   {item.get('id','')}:  {item.get('name','')}")
+      
+        else:
+            print(f"{item.get('id','')}:  {item.get('name','')} {item.get('ownersMacs','')}")
 
 
 isim_ip = "192.168.212.4"
 isim_login =  "Administrator"
 isim_pass = "P@ssw0rd"
-mac = "34:14:B5:DD:CA:92"
 delete = 1
-
 
 
 get_tech_table()
